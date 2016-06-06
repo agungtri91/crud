@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Crud;
+use Illuminate\Support\Str;
 
 class CrudController extends Controller
 {
@@ -38,10 +39,12 @@ class CrudController extends Controller
      */
     public function store(Request $request)
     {
-
         $tambah = new Crud();
-        $tambah->judul = $request['judul'];
-        $tambah->isi = $request['isi'];
+        $tambah->judul = $request->get('judul');
+        //Judul kita jadikan slug
+        $tambah->slug_judul = Str::slug($request->get('judul'));
+        $tambah->isi = $request->get('isi');
+        // Disini proses mendapatkan judul dan memindahkan letak gambar ke folder image
         $file       = $request->file('gambar');
         $fileName   = $file->getClientOriginalName();
         $request->file('gambar')->move("image/", $fileName);
@@ -58,9 +61,9 @@ class CrudController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $tampilkan = Crud::find($id);
+        $tampilkan = Crud::where('slug_judul', $slug)->first();
         return view('tampil')->with('tampilkan', $tampilkan);
     }
 

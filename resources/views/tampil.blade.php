@@ -13,7 +13,11 @@
 			<p>{!! $tampilkan->gambar !!}</p>
             <div class="divider"></div>
             <p>{!! $tampilkan->isi !!}</p>
-                
+               <!--  <form action="upload-gambar" enctype="multipart/form-data" method="POST">
+			       <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+			       <input name="gambar" type="file"/>
+			       <input value="upload" type="submit"/>
+			    </form> -->
 		</div>
 	</div>
 

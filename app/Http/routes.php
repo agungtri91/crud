@@ -19,6 +19,7 @@ Route::get('/edit/{id}', 'CrudController@edit');
 Route::post('/update/{id}', 'CrudController@update');
 Route::get('/delete/{id}', 'CrudController@destroy');
 Route::get('query', 'CariController@search');
+Route::get('/read/{slug}', 'CrudController@show');
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
